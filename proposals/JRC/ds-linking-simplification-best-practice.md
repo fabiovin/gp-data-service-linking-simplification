@@ -388,6 +388,182 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
 
 ## 9. Example <a name="example"></a>
 
+
+
+## Examples (XML encoded)
+
+#### View - WM(T)S - Get View Service Metadata
+
+_Note: for the definition of a WMTS service, use the proper codelist defined before inside the `protocol` element_
+
+```xml
+<gmd:transferOptions>
+  <gmd:MD_DigitalTransferOptions>
+      [...]
+    <gmd:onLine>
+      <gmd:CI_OnlineResource>
+        <gmd:linkage>
+          <gmd:URL>http://.../wms?request=GetCapabilities&amp;service=WMS&amp;version=1.3.0</gmd:URL>
+        </gmd:linkage>
+        <gmd:protocol>
+          <gmx:Anchor xlink:href="http://www.opengis.net/def/serviceType/ogc/wms">OGC:WMS</gmx:Anchor>
+        </gmd:protocol>
+        <gmd:applicationProfile>
+          <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view">view</gmx:Anchor>
+        </gmd:applicationProfile>
+        <gmd:name>
+          <gco:CharacterString>INSPIRE WMS</gco:CharacterString>
+        </gmd:name>
+      </gmd:CI_OnlineResource>
+    </gmd:onLine>
+      [...]
+  </gmd:MD_DigitalTransferOptions>
+</gmd:transferOptions>
+```
+
+#### View - WM(T)S - Get Map
+
+_Note: for the definition of a WMTS service, use the proper codelist defined before inside the `protocol` element_
+
+```xml
+<gmd:transferOptions>
+  <gmd:MD_DigitalTransferOptions>
+      [...]
+    <gmd:onLine>
+      <gmd:CI_OnlineResource>
+        <gmd:linkage>
+          <gmd:URL>http://.../wms?request=GetMap&amp;service=WMS&amp;version=1.3.0&amp;layers=1&amp;styles=default&amp;CRS=EPSG:4258&amp;format=image/png&amp;bbox=0.87,43.26,11.68,48.13&amp;width=600&amp;height=400</gmd:URL>
+        </gmd:linkage>
+        <gmd:protocol>
+          <gmx:Anchor xlink:href="http://www.opengis.net/def/serviceType/ogc/wms">OGC:WMS</gmx:Anchor>
+        </gmd:protocol>
+        <gmd:applicationProfile>
+          <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view">view</gmx:Anchor>
+        </gmd:applicationProfile>
+        <gmd:name>
+          <gco:CharacterString>INSPIRE WMS</gco:CharacterString>
+        </gmd:name>
+      </gmd:CI_OnlineResource>
+    </gmd:onLine>
+      [...]
+  </gmd:MD_DigitalTransferOptions>
+</gmd:transferOptions>
+```
+
+#### Download - ATOM feed - Get Download Service Metadata
+
+```xml
+<gmd:transferOptions>
+  <gmd:MD_DigitalTransferOptions>
+      [...]
+    <gmd:onLine>
+      <gmd:CI_OnlineResource>
+        <gmd:linkage>
+          <gmd:URL>http://.../atom/INSPIRE_DW_2021</gmd:URL>
+        </gmd:linkage>
+        <gmd:protocol>
+          <gmx:Anchor xlink:href="https://tools.ietf.org/html/rfc4287">ATOM Syndication Format</gmx:Anchor>
+        </gmd:protocol>
+        <gmd:applicationProfile>
+          <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download">download</gmx:Anchor>
+        </gmd:applicationProfile>
+        <gmd:name>
+          <gco:CharacterString>INSPIRE Download Service (ATOM)</gco:CharacterString>
+        </gmd:name>
+      </gmd:CI_OnlineResource>
+    </gmd:onLine>
+      [...]
+  </gmd:MD_DigitalTransferOptions>
+</gmd:transferOptions>
+```
+
+#### Download - ATOM feed - Get Spatial Data Set (subfeed)
+
+```xml
+<gmd:transferOptions>
+  <gmd:MD_DigitalTransferOptions>
+      [...]
+    <gmd:onLine>
+      <gmd:CI_OnlineResource>
+        <gmd:linkage>
+          <gmd:URL>http://.../atom/INSPIRE_DW_2021_Dataset.gml</gmd:URL>
+        </gmd:linkage>
+        <gmd:protocol>
+          <gmx:Anchor xlink:href="https://tools.ietf.org/html/rfc4287">ATOM Syndication Format</gmx:Anchor>
+        </gmd:protocol>
+        <gmd:applicationProfile>
+          <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download">download</gmx:Anchor>
+        </gmd:applicationProfile>
+        <gmd:name>
+          <gco:CharacterString>INSPIRE Download Service (ATOM)</gco:CharacterString>
+        </gmd:name>
+      </gmd:CI_OnlineResource>
+    </gmd:onLine>
+      [...]
+  </gmd:MD_DigitalTransferOptions>
+</gmd:transferOptions>
+```
+
+#### Download - OGC service - Get Download Service Metadata
+
+_Note: this example covers the WFS definition. For a WCS/SOS service, use the proper codelist defined before inside the `protocol` element_
+
+```xml
+<gmd:transferOptions>
+  <gmd:MD_DigitalTransferOptions>
+      [...]
+    <gmd:onLine>
+      <gmd:CI_OnlineResource>
+        <gmd:linkage>
+          <gmd:URL>http://.../wfs?service=wfs&amp;version=2.0.0&amp;request=GetCapabilities</gmd:URL>
+        </gmd:linkage>
+        <gmd:protocol>
+          <gmx:Anchor xlink:href="http://www.opengis.net/def/serviceType/ogc/wfs">OGC:WFS</gmx:Anchor>
+        </gmd:protocol>
+        <gmd:applicationProfile>
+          <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download">download</gmx:Anchor>
+        </gmd:applicationProfile>
+        <gmd:name>
+          <gco:CharacterString>INSPIRE Download Service (WFS)</gco:CharacterString>
+        </gmd:name>
+      </gmd:CI_OnlineResource>
+    </gmd:onLine>
+      [...]
+  </gmd:MD_DigitalTransferOptions>
+</gmd:transferOptions>
+```
+
+#### Download - OGC service - Get Spatial Data Set
+
+_Note: this example covers the WFS definition. For a WCS/SOS service, use the proper codelist defined before inside the `protocol` element_
+
+```xml
+<gmd:transferOptions>
+  <gmd:MD_DigitalTransferOptions>
+      [...]
+    <gmd:onLine>
+      <gmd:CI_OnlineResource>
+        <gmd:linkage>
+          <gmd:URL>http://.../wfs?service=wfs&amp;version=2.0.0&amp;request=GetFeature&amp;storedquery_id=http://inspire.ec.europa.eu/operation/download/GetSpatialDataSet&amp;DataSetIdCode=mycode&amp;DataSetIdNamespace=mynamespace&amp;CRS=EPSG:4326&amp;Language=eng</gmd:URL>
+        </gmd:linkage>
+        <gmd:protocol>
+          <gmx:Anchor xlink:href="http://www.opengis.net/def/serviceType/ogc/wfs">OGC:WFS</gmx:Anchor>
+        </gmd:protocol>
+        <gmd:applicationProfile>
+          <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download">download</gmx:Anchor>
+        </gmd:applicationProfile>
+        <gmd:name>
+          <gco:CharacterString>INSPIRE Download Service (WFS)</gco:CharacterString>
+        </gmd:name>
+      </gmd:CI_OnlineResource>
+    </gmd:onLine>
+      [...]
+  </gmd:MD_DigitalTransferOptions>
+</gmd:transferOptions>
+```
+
+
+
 **EXAMPLE** Feature collections response document (adapted from [OGC API - Features - 1](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_response_4))
 
 - This feature collections example response in JSON is for a data set with a single collection "building". It includes links to the features resource in all formats that are supported by the service (link relation type: `items`).
