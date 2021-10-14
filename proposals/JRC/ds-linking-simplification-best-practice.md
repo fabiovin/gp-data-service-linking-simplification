@@ -362,80 +362,42 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
 | --- | --- |
 | A | The link(s) with the link relation type `enclosure` SHOULD include the `title` link parameter. |
 
-### 8.5. Requirements class “INSPIRE-CRS” <a name="req-crs"></a>
+### 8.5. Recommendation id “INSPIRE-NS-Atom-Service-CoupledResource” <a name="rec-atom-service"></a>
 
-| Requirements class | http://inspire.ec.europa.eu/id/spec/oapif-download/1.0/req/inspire-crs |
+| Recommendation class | http://inspire.ec.europa.eu/id/spec/ds-linking-simplification/1.0/ |
 | --- | --- |
-| Target type | Web API |
-| Dependency | [INSPIRE-pre-defined-data-set-download-OAPIF](#req-pre-defined)  |
-| Dependency | [OAPIF requirements class Coordinate Reference Systems by Reference](https://docs.opengeospatial.org/is/18-058/18-058.html#_requirements_class_coordinate_reference_systems_by_reference)  |
+| Target type | ATOM Top Feed definition |
+| Dependency | N/A  |
 
-| **Recommendation** | **/rec/inspire-crs/recognised-crs** |
+
+| **Recommendation** | **/rec/atom-service/coupled-resource** |
 | --- | --- |
-| A | For each feature collection in the API at least one of the coordinate reference systems (CRS) listed below SHOULD be included in the list of supported coordinate reference systems. |
-
-**List of supported CRS**
-- http://www.opengis.net/def/crs/EPSG/0/4936
-- http://www.opengis.net/def/crs/EPSG/0/4937
-- http://www.opengis.net/def/crs/EPSG/0/4258
-- http://www.opengis.net/def/crs/EPSG/0/3035
-- http://www.opengis.net/def/crs/EPSG/0/3034
-- http://www.opengis.net/def/crs/EPSG/0/3038
-- http://www.opengis.net/def/crs/EPSG/0/3039
-- http://www.opengis.net/def/crs/EPSG/0/3040
-- http://www.opengis.net/def/crs/EPSG/0/3041
-- http://www.opengis.net/def/crs/EPSG/0/3042
-- http://www.opengis.net/def/crs/EPSG/0/3043
-- http://www.opengis.net/def/crs/EPSG/0/3044
-- http://www.opengis.net/def/crs/EPSG/0/3045
-- http://www.opengis.net/def/crs/EPSG/0/3046
-- http://www.opengis.net/def/crs/EPSG/0/3047
-- http://www.opengis.net/def/crs/EPSG/0/3048
-- http://www.opengis.net/def/crs/EPSG/0/3049
-- http://www.opengis.net/def/crs/EPSG/0/3050
-- http://www.opengis.net/def/crs/EPSG/0/3051
-- http://www.opengis.net/def/crs/EPSG/0/5730
-- http://www.opengis.net/def/crs/EPSG/0/7409
+| A | For each sub-feed collection in the feed, it shall exist at least one metadataURL pointing to the data set metadata definition available in a Discovery Service catalog. |
 
 
-**NOTE** The MIG supported a proposed solution to set up a Coordinate Reference System (CRS) registry and control body to manage the proposal of additional CRS under the governance of the MIG. Once this registry has been established, this requirements class will be updated.
+## 9. Future developments <a name="future-dev"></a>
 
-
-## 9. Example <a name="example"></a>
-
-See Appendix A for complete examples
-
-
-
+Within this document, the choosen approach highlights the possibility of a further simplification on a broader level of the INSPIRE implementation.
+For instance, the more direct connection expressed with these recommendations could suggest the implementation of a Scenario 2, which requirements and definitions are already provided in both the [INSPIRE DW TG] and [INSPIRE VW TG] documents.
+Furthermore, the implementation of the Scenario 2 could offer the opportunity of a revision of the mapping of the INSPIRE requirements, currently expressed in the Extended Capabilities section.
 
 
 ## 10. Bibliography <a name="bibliography"></a>
 
-- \[Alla10\] ALLAMARAJU, Subbu. *RESTful Web services cookbook*. O’Reilly Media, 2010. ISBN 978-0-596-80168-7.
-- \[Dodd16\] DODDS, Leigh. Why are bulk downloads of open data important? *Lost Boy*. 19 September 2016. \[Viewed 4 March 2020\]. Available from: <https://blog.ldodds.com/2016/09/19/why-are-bulk-downloads-of-open-data-important/>
-- \[DWBP\] W3C. *Data on the Web Best Practices*. W3C Recommendation. 31 January 2017. Available from: <https://www.w3.org/TR/dwbp/>
-- \[GCloud-REST\] *REST Guidelines of Belgian government institutions*. Available from: <https://www.gcloud.belgium.be/rest/>
-- [INSPIRE UML-to-GeoJSON encoding rule](https://github.com/INSPIRE-MIF/2017.2/blob/master/GeoJSON/geojson-encoding-rule.md)
-- \[MDN\] MDN. *406 Not Acceptable - HTTP \| MDN*.  Available from: <https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/406>
-- \[OD\] *Open Definition*. Version 2.1. Open Knowledge Foundation, November 2015. Available from: <https://opendefinition.org/od/2.1>
-- \[SDWBP\] W3C. *Spatial Data on the Web Best Practices*. W3C Working Group Note & OGC Best Practice. 28 September 2017. Available from: <https://www.w3.org/TR/sdw-bp/>
-- \[SO1\] How to properly send 406 status code? *Stack Overflow*. \[Viewed 4 March 2020\]. Available from: <https://stackoverflow.com/questions/4422980/how-to-properly-send-406-status-code>
-- \[SO2\] Format for 406 Not Acceptable payload? *Stack Overflow*. \[Viewed 4 March 2020\]. Available from: <https://stackoverflow.com/questions/50102277/format-for-406-not-acceptable-payload>
+_TO_BE_REVIEW_
+
 - \[TG Download\] INITIAL OPERATING CAPABILITY TASK FORCE FOR NETWORK SERVICES. *Technical Guidance for the implementation of INSPIRE Download Services*. Version 3.1. Initial Operating Capability Task Force, 9 August 2013. Available from: https://inspire.ec.europa.eu/documents/technical-guidance-implementation-inspire-download-services
 
 <!-- Second parts of the reference-style links, see also https://www.markdownguide.org/basic-syntax/#reference-style-links  -->
-[Alla10]: https://www.oreilly.com/library/view/restful-web-services/9780596809140/ "RESTful Web services cookbook"
-[GCloud-REST]: https://www.gcloud.belgium.be/rest/ "REST Guidelines of Belgian government institutions"
-[MDN]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/406 "406 Not Acceptable - HTTP | MDN"
-[SO1]: https://stackoverflow.com/questions/4422980/how-to-properly-send-406-status-code "How to properly send 406 status code? (Stack Overflow)"
-[SO2]: https://stackoverflow.com/questions/50102277/format-for-406-not-acceptable-payload "Format for 406 Not Acceptable payload? (Stack Overflow)"
-[RFC 7807]: https://www.rfc-editor.org/info/rfc7807 "Problem Details for HTTP APIs"
 [TG Download]: https://inspire.ec.europa.eu/documents/technical-guidance-implementation-inspire-download-services "Technical Guidance for the implementation of INSPIRE Download Services"
 
 # Annex A: Examples <a name="inspire-examples"></a>
-## Examples (XML encoded)
 
-#### Example of Resource Locator of a dataset metadata linking to an INSPIRE View Service - WM(T)S - Get View Service Metadata
+## Examples (XML encoded)
+The following collection shows a series of XML snippets.
+_These examples are purely informative and do not constitute a reference definition of a conformant metadata._
+
+#### Snippet of Resource Locator of a dataset metadata linking to an INSPIRE View Service - Get View Service Metadata
 
 _Note: for the definition of a WMTS service, use the proper codelist defined before inside the `protocol` element_
 
@@ -493,7 +455,9 @@ _Note: for the definition of a WMTS service, use the proper codelist defined bef
 </gmd:transferOptions>
 ```
 
-#### Download - ATOM feed - Get Download Service Metadata
+### Examples of Resource Locator of a data set metadata linking to a Download Service
+
+#### Resource Locator to an ATOM feed (Get Download Service Metadata)
 
 ```xml
 <gmd:transferOptions>
@@ -502,13 +466,13 @@ _Note: for the definition of a WMTS service, use the proper codelist defined bef
     <gmd:onLine>
       <gmd:CI_OnlineResource>
         <gmd:linkage>
-          <gmd:URL>http://.../atom/INSPIRE_DW_2021</gmd:URL>
+          <gmd:URL>http://.../atom/INSPIRE_DW_dataset_2021</gmd:URL>
         </gmd:linkage>
         <gmd:protocol>
           <gmx:Anchor xlink:href="https://tools.ietf.org/html/rfc4287">ATOM Syndication Format</gmx:Anchor>
         </gmd:protocol>
         <gmd:applicationProfile>
-          <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download">download</gmx:Anchor>
+          <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download">Download Service</gmx:Anchor>
         </gmd:applicationProfile>
         <gmd:name>
           <gco:CharacterString>INSPIRE Download Service (ATOM)</gco:CharacterString>
@@ -547,7 +511,7 @@ _Note: for the definition of a WMTS service, use the proper codelist defined bef
 </gmd:transferOptions>
 ```
 
-#### Download - OGC service - Get Download Service Metadata
+#### Example of a Resource Locator of a data set metadata linking a Download Service (Get Download Service Metadata)
 
 _Note: this example covers the WFS definition. For a WCS/SOS service, use the proper codelist defined before inside the `protocol` element_
 
@@ -561,10 +525,10 @@ _Note: this example covers the WFS definition. For a WCS/SOS service, use the pr
           <gmd:URL>http://.../wfs?service=wfs&amp;version=2.0.0&amp;request=GetCapabilities</gmd:URL>
         </gmd:linkage>
         <gmd:protocol>
-          <gmx:Anchor xlink:href="http://www.opengis.net/def/serviceType/ogc/wfs">OGC:WFS</gmx:Anchor>
+          <gmx:Anchor xlink:href="http://www.opengis.net/def/serviceType/ogc/wfs">wfs</gmx:Anchor>
         </gmd:protocol>
         <gmd:applicationProfile>
-          <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download">download</gmx:Anchor>
+          <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download">Download Service</gmx:Anchor>
         </gmd:applicationProfile>
         <gmd:name>
           <gco:CharacterString>INSPIRE Download Service (WFS)</gco:CharacterString>
@@ -576,7 +540,7 @@ _Note: this example covers the WFS definition. For a WCS/SOS service, use the pr
 </gmd:transferOptions>
 ```
 
-#### Download - OGC service - Get Spatial Data Set
+#### Example of an optional definition of a Resource Locator in the dataset metadata linking directly the downloadable dataset (Get Spatial Data Set)
 
 _Note: this example covers the WFS definition. For a WCS/SOS service, use the proper codelist defined before inside the `protocol` element_
 
@@ -590,13 +554,13 @@ _Note: this example covers the WFS definition. For a WCS/SOS service, use the pr
           <gmd:URL>http://.../wfs?service=wfs&amp;version=2.0.0&amp;request=GetFeature&amp;storedquery_id=http://inspire.ec.europa.eu/operation/download/GetSpatialDataSet&amp;DataSetIdCode=mycode&amp;DataSetIdNamespace=mynamespace&amp;CRS=EPSG:4326&amp;Language=eng</gmd:URL>
         </gmd:linkage>
         <gmd:protocol>
-          <gmx:Anchor xlink:href="http://www.opengis.net/def/serviceType/ogc/wfs">OGC:WFS</gmx:Anchor>
+          <gmx:Anchor xlink:href="http://www.opengis.net/def/serviceType/ogc/wfs">wfs</gmx:Anchor>
         </gmd:protocol>
         <gmd:applicationProfile>
-          <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download">download</gmx:Anchor>
+          <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download">Download Service</gmx:Anchor>
         </gmd:applicationProfile>
         <gmd:name>
-          <gco:CharacterString>INSPIRE Download Service (WFS)</gco:CharacterString>
+          <gco:CharacterString>INSPIRE Dataset</gco:CharacterString>
         </gmd:name>
       </gmd:CI_OnlineResource>
     </gmd:onLine>
