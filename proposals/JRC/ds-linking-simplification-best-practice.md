@@ -155,7 +155,7 @@ This conformance class requires the presence of `<gmd:protocol>` and `<gmd:appli
 
 The presence of additional ResourceLocator elements, pointing to the data itself (eg. "Get Spatial Data Set" request of a Download Service), is permitted, due to the multiplicity expressed by the **TG Requirement 1.8**. Consequently, these additional ResourceLocator elements should avoid at least the use of the `<gmd:applicationProfile>` element, specified below, in order to reduce the complexity of a machine-to-machine element recognition made by an INSPIRE software implementation (eg. INSPIRE Geoportal).
 
-### Use of \<gmd:URL\> element
+### Requirement: \<gmd:URL\> element
 
 - Within this element, the URL shall point to the response of a "Get View/Download Service Metadata" request of the service providing access to this data set (eg. the "GetCapabilities" document in case of a OGC:WFS service).
 
@@ -163,7 +163,7 @@ The presence of additional ResourceLocator elements, pointing to the data itself
 | --- | --- |
 | A | The element `URL` SHALL point to the response of a "Get View/Download Service Metadata' request. |
 
-### Use of \<gmd:protocol\> element
+### Requirement: \<gmd:protocol\> element
 
 - For this element, the central INSPIRE Registry offers a series of external codelist values from the register: https://inspire.ec.europa.eu/metadata-codelist/ProtocolValue
 - Regarding the label of a codelist, the central INSPIRE Registry specifies the text to be use, and this should follow the metadata language.
@@ -191,7 +191,7 @@ The presence of additional ResourceLocator elements, pointing to the data itself
 </gmd:protocol>
 ```
 
-### Use of \<gmd:applicationProfile\> element
+### Requirement: \<gmd:applicationProfile\> element
 
 - For this element, the central INSPIRE Registry offers the codelist values from the register: https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType
 - Regarding the label of a codelist, the central INSPIRE Registry specifies the text to be use, and this should follow the metadata language.
@@ -219,7 +219,7 @@ The presence of additional ResourceLocator elements, pointing to the data itself
 </gmd:applicationProfile>
 ```
 
-#### Linkage to a INSPIRE Download Service
+### Requirement: INSPIRE Download Service linkage
 
 | **Requirement** | **/req/download-linkage** |
 | --- | --- |
@@ -228,7 +228,7 @@ The presence of additional ResourceLocator elements, pointing to the data itself
 
 For an example of this linkage requirement, see [Annex A: Examples](#annex-a)
 
-#### Linkage to a INSPIRE View Service
+### Requirement: INSPIRE View Service linkage
 
 | **Requirement** | **/req/view-linkage** |
 | --- | --- |
@@ -244,23 +244,15 @@ For an example of this linkage expression, see [Annex A: Examples](#annex-a)
 | Target type | Service metadata |
 | Dependency | N/A |
 
+### Requirement: \<metadataURL\> element
 
+### Requirement: INSPIRE Network service - Scenario 1
 
-
-### 8.5. Recommendation id “INSPIRE-NS-Atom-Service-CoupledResource” <a name="rec-atom-service"></a>
-
-_TO_BE_REVIEW_ in particular, how to express a CoupledResource in a ATOM feed
-
-| Recommendation class | http://inspire.ec.europa.eu/id/spec/ds-linking-simplification/1.0/ |
-| --- | --- |
-| Target type | ATOM Top Feed definition |
-| Dependency | N/A  |
-
+### Requirement: INSPIRE Network service - Scenario 2
 
 | **Recommendation** | **/rec/atom-service/coupled-resource** |
 | --- | --- |
 | A | For each data set feed collection in the top feed, it shall exist at least one metadataURL pointing to the data set metadata definition available in a Discovery Service catalog. |
-
 
 ## 9. Future developments <a name="future-dev"></a>
 
@@ -285,7 +277,9 @@ _TO_BE_REVIEW_
 The following collection shows a series of XML snippets.
 _These examples are purely informative and do not constitute a reference definition of a conformant metadata._
 
-#### Resource Locator of a dataset metadata linking to an INSPIRE View Service - Get View Service Metadata
+### Examples of Resource Locator for INSPIRE View Service
+
+#### Resource Locator to a "Get View Service Metadata" operation - WMS GetCapabilities
 
 ```xml
 <gmd:transferOptions>
@@ -312,9 +306,7 @@ _These examples are purely informative and do not constitute a reference definit
 </gmd:transferOptions>
 ```
 
-#### View - WM(T)S - Get Map
-
-_Note: for the definition of a WMTS service, use the proper codelist defined before inside the `protocol` element_
+#### Additional Resource Locator to an "View Service - Get Map" operation - WMS GetMap
 
 ```xml
 <gmd:transferOptions>
@@ -326,13 +318,10 @@ _Note: for the definition of a WMTS service, use the proper codelist defined bef
           <gmd:URL>http://.../wms?request=GetMap&amp;service=WMS&amp;version=1.3.0&amp;layers=1&amp;styles=default&amp;CRS=EPSG:4258&amp;format=image/png&amp;bbox=0.87,43.26,11.68,48.13&amp;width=600&amp;height=400</gmd:URL>
         </gmd:linkage>
         <gmd:protocol>
-          <gmx:Anchor xlink:href="http://www.opengis.net/def/serviceType/ogc/wms">OGC:WMS</gmx:Anchor>
+          <gmx:Anchor xlink:href="http://www.opengis.net/def/serviceType/ogc/wms">wms</gmx:Anchor>
         </gmd:protocol>
-        <gmd:applicationProfile>
-          <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view">view</gmx:Anchor>
-        </gmd:applicationProfile>
         <gmd:name>
-          <gco:CharacterString>INSPIRE WMS</gco:CharacterString>
+          <gco:CharacterString>INSPIRE WMS - GetMap request</gco:CharacterString>
         </gmd:name>
       </gmd:CI_OnlineResource>
     </gmd:onLine>
@@ -341,9 +330,9 @@ _Note: for the definition of a WMTS service, use the proper codelist defined bef
 </gmd:transferOptions>
 ```
 
-### Examples of Resource Locator of a data set metadata linking to a Download Service
+### Examples of Resource Locator for INSPIRE Download Service
 
-#### Resource Locator to an ATOM feed (Get Download Service Metadata)
+#### Resource Locator  a "Get Download Service Metadata" operation - ATOM topfeed
 
 ```xml
 <gmd:transferOptions>
@@ -370,7 +359,7 @@ _Note: for the definition of a WMTS service, use the proper codelist defined bef
 </gmd:transferOptions>
 ```
 
-#### Download - ATOM feed - Get Spatial Data Set (subfeed)
+#### Additional Resource Locator for a "Get Spatial Data Set" - ATOM subfeed
 
 ```xml
 <gmd:transferOptions>
@@ -384,9 +373,6 @@ _Note: for the definition of a WMTS service, use the proper codelist defined bef
         <gmd:protocol>
           <gmx:Anchor xlink:href="https://tools.ietf.org/html/rfc4287">ATOM Syndication Format</gmx:Anchor>
         </gmd:protocol>
-        <gmd:applicationProfile>
-          <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download">download</gmx:Anchor>
-        </gmd:applicationProfile>
         <gmd:name>
           <gco:CharacterString>INSPIRE Download Service (ATOM)</gco:CharacterString>
         </gmd:name>
@@ -397,9 +383,7 @@ _Note: for the definition of a WMTS service, use the proper codelist defined bef
 </gmd:transferOptions>
 ```
 
-#### Example of a Resource Locator of a data set metadata linking a Download Service (Get Download Service Metadata)
-
-_Note: this example covers the WFS definition. For a WCS/SOS service, use the proper codelist defined before inside the `protocol` element_
+#### _TO_BE_REVIEW_ Example of a Resource Locator of a data set metadata linking a Download Service (Get Download Service Metadata)
 
 ```xml
 <gmd:transferOptions>
@@ -426,9 +410,9 @@ _Note: this example covers the WFS definition. For a WCS/SOS service, use the pr
 </gmd:transferOptions>
 ```
 
-#### Example of an optional definition of a Resource Locator in the dataset metadata linking directly the downloadable dataset (Get Spatial Data Set)
+#### _TO_BE_REVIEW_ Example of an optional definition of a Resource Locator in the dataset metadata linking directly the downloadable dataset (Get Spatial Data Set)
 
-_Note: this example covers the WFS definition. For a WCS/SOS service, use the proper codelist defined before inside the `protocol` element_
+_Note: this example covers the WFS definition. For a WCS/SOS service, use the proper codelist for the `protocol` element_
 
 ```xml
 <gmd:transferOptions>
@@ -454,9 +438,3 @@ _Note: this example covers the WFS definition. For a WCS/SOS service, use the pr
   </gmd:MD_DigitalTransferOptions>
 </gmd:transferOptions>
 ```
-
-# Annex B: template <a name="annex-b"></a>
-_TO_BE_REVIEW_
-
-# Annex C: template  <a name="annex-c"></a>
-_TO_BE_REVIEW_
