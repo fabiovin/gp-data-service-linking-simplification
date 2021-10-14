@@ -30,19 +30,25 @@
 _TODO_
 
 ## 2. Scope <a name="scope"></a>
-_TODO_
+
+This is the best practice document, originated from a consolidated proposal based on the collection and comparison of all the proposals received from the contributing Member State representatives of the MIWP 2.3.2 technical sub-group.
+
+This document implements the recommendations and best-practice actions as initially described in the [Discussion Paper on possible simplification of data-service linking in INSPIRE](https://github.com/INSPIRE-MIF/gp-data-service-linking-simplification/blob/main/resources/Discussion%20Paper%20on%20data-service%20linking%20v0.5.docx) and further improved by the subsequent proposals [proposals for the simplification approach](https://github.com/INSPIRE-MIF/gp-data-service-linking-simplification/tree/main/proposals) made by the members of the technical sub-group.
+The reference for the metadata specification used in this proposal is the [INSPIRE MD TG v2.0.1](https://inspire.ec.europa.eu/id/document/tg/metadata-iso19139). The reference for the INSPIRE Network Service (Download and View) specifications are the [INSPIRE NS - Download Service TG] and [INSPIRE NS - View Service TG].
 
 ## 3. Conformance <a name="conformance"></a>
+
 _TODO_
 
 ## 4. Normative references <a name="normative-references"></a>
+
 _TO_BE_REVIEW_
 
 - **[ISO 19115-2:2019](https://schemas.isotc211.org/schemas/19115/-2/gmi/1.0/gmi.xsd)** - ISO 19115-2:2019, *Geographic information — Metadata — Part 2: Extensions for acquisition and processing*
 - **[ISO/TS 19139:2007](https://www.isotc211.org/2005/gmd/)** - ISO/TS 19139:2007, *Geographic information — Metadata — XML schema implementation*
 - **[IRs for NS]** - Commission Regulation (EC) No 976/2009 of 19 October 2009 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards the Network Services
 - **[IRs for ISDSS]** - Commission Regulation (EU) No 1089/2010 of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards interoperability of spatial data sets and services
-- **[INSPIRE MD TG v2.0]** - INSPIRE Metadata Technical Guidance v2.0
+- **[INSPIRE MD TG v2.0.1]** - INSPIRE Technical Guidance v2.0.1
 - **[INSPIRE NS - Download Service TG]**
 - **[INSPIRE NS - View Service TG]**
 - **[RFC 4287]** - Internet Engineering Task Force (IETF). RFC 4287, *The Atom Syndication Format*. Initial release December 2005
@@ -57,7 +63,7 @@ _TO_BE_REVIEW_
 <!-- Second parts of the reference-style links, see also https://www.markdownguide.org/basic-syntax/#reference-style-links  -->
 [IRs for NS]: https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02009R0976-20141231&from=EN "Implementing Rules for Network Services (consolidated version of 31/12/2014)"
 [IRs for ISDSS]: https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02010R1089-20141231&from=EN "Implementing Rules for interoperability of spatial data sets and services (consolidated version of 31/12/2014)"
-[INSPIRE MD TG v2.0]: https://inspire.ec.europa.eu
+[INSPIRE MD TG v2.0.1]: https://inspire.ec.europa.eu/id/document/tg/metadata-iso19139
 [INSPIRE NS - Download Service TG]: https://inspire.ec.europa.eu
 [INSPIRE NS - View Service TG]: https://inspire.ec.europa.eu
 [OGC API - Features - 1]: http://docs.opengeospatial.org/is/17-069r3/17-069r3.html "OGC API - Features - Part 1: Core"
