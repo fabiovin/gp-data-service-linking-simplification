@@ -242,15 +242,39 @@ For an example of this linkage expression, see [Annex A: Examples](#annex-a)
 | Target type | Service metadata |
 | Dependency | N/A |
 
-### Requirement: \<metadataURL\> element
+The CoupledResource metadata element refers to, where relevant, the target spatial data set(s) of the described service.  
+It is implemented by reference, i.e. through a URL that points to the metadata record of the data on  
+which the service operates. It helps therefore linking services to the relevant datasets.
+This conformance class strictly follows the **TG Requirement 3.6** of the [INSPIRE MD TG] for the expression of the CoupledResource element.
 
-### Requirement: INSPIRE Network service - Scenario 1
+Regarding the definition of a Network Service metadata, two scenarios have been identified for publishing metadata conforming to the [IRs for NS], and on the [INSPIRE MD TG]. It is up to the Member  
+State to choose which scenario best fits its needs. As these scenarios are not mutually exclusive, a  
+Member State may choose to implement both.
 
-### Requirement: INSPIRE Network service - Scenario 2
+**NOTE** For the ATOM implementation, the [INSPIRE NS - Download Service TG] doesn't offers a similar multiple scenario configuration, due to the lack of mapping elements in such implementation.
 
-| **Recommendation** | **/rec/atom-service/coupled-resource** |
+### 8.2.1 INSPIRE Network service - Scenario 1
+
+- With the implementation of the Scenario 1, the INSPIRE network service metadata is available in a Discovery Service catalog and it is referenced through the `<inspire_common:MetadataURL>` element within the extended INSPIRE capabilities of such service.
+- The service metadata shall define a `<srv:operatesOn>` element for every defined data set published by the service.
+- The data set metadata URL may point to a Discovery Service different from the national reference catalog. This may apply especially for federated Discovery Service catalogues.
+
+### Requirement: \<srv:operatesOn\> element
+
+| **Requirement** | **/req/coupled-resource-operateson-locator** |
 | --- | --- |
-| A | For each data set feed collection in the top feed, it shall exist at least one metadataURL pointing to the data set metadata definition available in a Discovery Service catalog. |
+| A | The `xlink:href` attribute of each of the `srv:operatesOn` elements SHALL contain a URI pointing to the metadata record of the provided data set or data set series. |
+
+### 8.2.2 INSPIRE Network service - Scenario 2
+
+ - With the implementation of the Scenario 2, the [INSPIRE NS - Download Service TG] maps all INSPIRE metadata elements to the OGC capabilities elements, where applicable, and it relies on the ExtendedCapabilities section for the remaining elements.
+- The data set metadata URL may point to a Discovery Service different from the national reference catalog. This may apply especially for federated Discovery Service catalogues.
+
+### Requirement: \<wms:MetadataURL\> and \<wfs:MetadataURL\> elements
+
+| **Requirement** | **/req/coupled-resource-metadataurl-locator** |
+| --- | --- |
+| A | The URL expressed within the element `metadataURL` SHALL resolve to the metadata record of the data set or data set series, available in a Discovery Service catalog. |
 
 ## 9. Future developments <a name="future-dev"></a>
 
@@ -258,7 +282,7 @@ Within this document, the series of recommendations imply the possibility of fur
 Note that often the person or organization responsible for the metadata is not the same as the responsible for the service operations. This can lead to duplication, errors and/or outdated set of information.
 For instance, the more direct connection expressed with these recommendations could suggest the implementation of a [Scenario 2], which requirements and definitions are already provided in both the [INSPIRE NS - Download Service TG] and [INSPIRE NS - View Service TG] documents.
 In this case, the service metadata is no longer required (at least, for this linkage simplification purpose) and so its creation can be skipped, or automated by dedicated features of a software implementation of the INSPIRE Discovery Service.
-Furthermore, the implementation of the above mentioned [Scenario 2] could offer the opportunity of a revision of the mapping of the INSPIRE requirements, currently expressed in the Extended Capabilities section, since the current lack of support of that vendor section in some (especially commercial) software implementation of OGC service.
+Furthermore, the implementation of the above mentioned [Scenario 2] for Network Service could offer the opportunity of a revision of the mapping of the INSPIRE requirements, currently expressed in the Extended Capabilities section, since the current lack of support of that vendor section in some (especially commercial) software implementation of OGC service.
 
 ## 10. Bibliography <a name="bibliography"></a>
 
