@@ -1,10 +1,12 @@
 
-# Data Service Linking Simplification Best Practice guidelines
+# Data Service Linking Simplification: Best Practice guidelines
 
 `Version: draft 1.0`
 `Date: 2021-10-13`
 
 ## Table of Contents
+
+_TO_BE_REVIEW_
 
 * [1. Introduction](#introduction)
 * [2. Scope](#scope)
@@ -21,20 +23,26 @@
     * [8.2. Recommendation “INSPIRE-NS-CoupledResource”](#rec-ns-coupled-res)
 * [9. Example](#example)
 * [10. Bibliography](#bibliography)
-* [Annex A: Abstract Test Suite](#ats)
-* [Annex B: Mapping the requirements from the IRs to the OGC  API - Features standard (and extensions)](#ir2oapif)
-* [Annex C: Mapping between INSPIRE Network services metadata and OpenAPI definitions](#inspire-ns-openapi)
-* [Annex D: Supported languages](#supported-lang)
+* [Annex A: Examples](#annex-a)
+* [Annex B: template](#annex-b)
+* [Annex C: template](#annex-c)
+* [Annex D: template](#annex-d)
 
 ## 1. Introduction <a name="introduction"></a>
-_TODO_
 
-## 2. Scope <a name="scope"></a>
+_TO_BE_REVIEW_
 
 This is the best practice document, originated from a consolidated proposal based on the collection and comparison of all the proposals received from the contributing Member State representatives of the MIWP 2.3.2 technical sub-group.
 
 This document implements the recommendations and best-practice actions as initially described in the [Discussion Paper on possible simplification of data-service linking in INSPIRE](https://github.com/INSPIRE-MIF/gp-data-service-linking-simplification/blob/main/resources/Discussion%20Paper%20on%20data-service%20linking%20v0.5.docx) and further improved by the subsequent proposals [proposals for the simplification approach](https://github.com/INSPIRE-MIF/gp-data-service-linking-simplification/tree/main/proposals) made by the members of the technical sub-group.
+
 The reference for the metadata specification used in this proposal is the [INSPIRE MD TG v2.0.1](https://inspire.ec.europa.eu/id/document/tg/metadata-iso19139). The reference for the INSPIRE Network Service (Download and View) specifications are the [INSPIRE NS - Download Service TG] and [INSPIRE NS - View Service TG].
+
+## 2. Scope <a name="scope"></a>
+
+_TO_BE_REVIEW_
+
+The scope of this document is to provide a well-defined series of interpretations and recommendations of the already available Requirements and Recommendations expressed in the various Technical Guidance documents.
 
 ## 3. Conformance <a name="conformance"></a>
 
