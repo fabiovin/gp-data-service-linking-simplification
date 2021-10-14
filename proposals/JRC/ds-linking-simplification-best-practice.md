@@ -22,7 +22,6 @@ _TO_BE_REVIEW_
     * [8.1. Conformance class: “INSPIRE-Data-set-Metadata-Resource-Locator”](#cc-ds-md-resloc)
     * [8.2. Conformance class: “INSPIRE-Network-Service-Metadata-Coupled-Resource”](#cc-ns-md-coupledres)
 *  [9. Future developments](#future-dev)
-* [10. Bibliography](#bibliography)
 * [Annex A: Examples](#annex-a)
 
 ## 1. Introduction <a name="introduction"></a>
@@ -38,17 +37,20 @@ The reference for the metadata specification used in this proposal is the [INSPI
 ## 2. Scope <a name="scope"></a>
 
 _TO_BE_REVIEW_
+
 The scope of this document is to provide a well-defined series of opinionated interpretations and rules (that de facto standard web applications can currently support), based on the current list of Requirements and Recommendations expressed in the INSPIRE Technical Guidance documents.
 
 ## 3. Conformance <a name="conformance"></a>
 
 _TO_BE_REVIEW_
+
 The recommendations expressed here apply to the data set and service metadata records, as well as to the service (capabilities) documents.
 In particular, the data set and service metadata records must be INSPIRE-compliant (through the Reference Validator), should be available in the relevant national geoportal catalog (see https://inspire.ec.europa.eu/INSPIRE-in-your-Country), and they should be harvested by the [INSPIRE Geoportal](https://inspire-geoportal.ec.europa.eu).
 
 ## 4. Normative references <a name="normative-references"></a>
 
 _TO_BE_REVIEW_
+
 - **[ISO 19115-2:2019](https://schemas.isotc211.org/schemas/19115/-2/gmi/1.0/gmi.xsd)** - ISO 19115-2:2019, *Geographic information — Metadata — Part 2: Extensions for acquisition and processing*
 - **[ISO/TS 19139:2007](https://www.isotc211.org/2005/gmd/)** - ISO/TS 19139:2007, *Geographic information — Metadata — XML schema implementation*
 - **[IRs for NS]** - Commission Regulation (EC) No 976/2009 of 19 October 2009 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards the Network Services
@@ -80,6 +82,7 @@ _TO_BE_REVIEW_
 ## 5. Terms and definitions <a name="terms-and-definitions"></a>
 
 _TO_BE_REVIEW_
+
 For the purposes of this document, the following terms and definitions apply:
 
 | Term | Definition | Source |
@@ -283,15 +286,6 @@ Note that often the person or organization responsible for the metadata is not t
 For instance, the more direct connection expressed with these recommendations could suggest the implementation of a [Scenario 2], which requirements and definitions are already provided in both the [INSPIRE NS - Download Service TG] and [INSPIRE NS - View Service TG] documents.
 In this case, the service metadata is no longer required (at least, for this linkage simplification purpose) and so its creation can be skipped, or automated by dedicated features of a software implementation of the INSPIRE Discovery Service.
 Furthermore, the implementation of the above mentioned [Scenario 2] for Network Service could offer the opportunity of a revision of the mapping of the INSPIRE requirements, currently expressed in the Extended Capabilities section, since the current lack of support of that vendor section in some (especially commercial) software implementation of OGC service.
-
-## 10. Bibliography <a name="bibliography"></a>
-
-_TO_BE_REVIEW_
-
-- \[TG Download\] INITIAL OPERATING CAPABILITY TASK FORCE FOR NETWORK SERVICES. *Technical Guidance for the implementation of INSPIRE Download Services*. Version 3.1. Initial Operating Capability Task Force, 9 August 2013. Available from: https://inspire.ec.europa.eu/documents/technical-guidance-implementation-inspire-download-services
-
-<!-- Second parts of the reference-style links, see also https://www.markdownguide.org/basic-syntax/#reference-style-links  -->
-[TG Download]: https://inspire.ec.europa.eu/documents/technical-guidance-implementation-inspire-download-services "Technical Guidance for the implementation of INSPIRE Download Services"
 
 # Annex A: Examples <a name="inspire-examples"></a>
 
