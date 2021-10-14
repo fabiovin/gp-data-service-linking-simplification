@@ -26,7 +26,6 @@ _TO_BE_REVIEW_
 * [Annex A: Examples](#annex-a)
 * [Annex B: template](#annex-b)
 * [Annex C: template](#annex-c)
-* [Annex D: template](#annex-d)
 
 ## 1. Introduction <a name="introduction"></a>
 
@@ -36,13 +35,13 @@ This is the best practice document, originated from a consolidated proposal base
 
 This document implements the recommendations and best-practice actions as initially described in the [Discussion Paper on possible simplification of data-service linking in INSPIRE](https://github.com/INSPIRE-MIF/gp-data-service-linking-simplification/blob/main/resources/Discussion%20Paper%20on%20data-service%20linking%20v0.5.docx) and further improved by the subsequent proposals [proposals for the simplification approach](https://github.com/INSPIRE-MIF/gp-data-service-linking-simplification/tree/main/proposals) made by the members of the technical sub-group.
 
-The reference for the metadata specification used in this proposal is the [INSPIRE MD TG v2.0.1](https://inspire.ec.europa.eu/id/document/tg/metadata-iso19139). The reference for the INSPIRE Network Service (Download and View) specifications are the [INSPIRE NS - Download Service TG] and [INSPIRE NS - View Service TG].
+The reference for the metadata specification used in this proposal is the [INSPIRE MD TG]. The reference for the INSPIRE Network Service (Download and View) specifications are the [INSPIRE NS - Download Service TG] and [INSPIRE NS - View Service TG].
 
 ## 2. Scope <a name="scope"></a>
 
 _TO_BE_REVIEW_
 
-The scope of this document is to provide a well-defined series of interpretations and recommendations of the already available Requirements and Recommendations expressed in the various Technical Guidance documents.
+The scope of this document is to provide a well-defined series of opinionated interpretations and rules (that de facto standard web applications can currently support), based on the current list of Requirements and Recommendations expressed in the INSPIRE Technical Guidance documents.
 
 ## 3. Conformance <a name="conformance"></a>
 
@@ -56,10 +55,10 @@ _TO_BE_REVIEW_
 - **[ISO/TS 19139:2007](https://www.isotc211.org/2005/gmd/)** - ISO/TS 19139:2007, *Geographic information — Metadata — XML schema implementation*
 - **[IRs for NS]** - Commission Regulation (EC) No 976/2009 of 19 October 2009 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards the Network Services
 - **[IRs for ISDSS]** - Commission Regulation (EU) No 1089/2010 of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards interoperability of spatial data sets and services
-- **[INSPIRE MD TG v2.0.1]** - INSPIRE Technical Guidance v2.0.1
-- **[INSPIRE NS - Download Service TG]**
-- **[INSPIRE NS - View Service TG]**
-- **[RFC 4287]** - Internet Engineering Task Force (IETF). RFC 4287, *The Atom Syndication Format*. Initial release December 2005
+- **[INSPIRE MD TG]** - JRC. *Technical Guidance for the implementation of INSPIRE dataset and service metadata based on ISO/TS 19139:2007*.  v2.0.1 - 2017-03-02
+- **[INSPIRE NS - Download Service TG]** - JRC. *Technical Guidance for the implementation of INSPIRE View Services*. v3.1 - 2013-08-09
+- **[INSPIRE NS - View Service TG]** - JRC. *Technical Guidance for the implementation of INSPIRE Download Services*. v3.11 - 2013-04-04
+- **[RFC 4287]** - Internet Engineering Task Force (IETF). RFC 4287, *The Atom Syndication Format*. Initial release: December 2005
 - **[RFC 7231]** - Internet Engineering Task Force (IETF). RFC 7231, *Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content*. June 2014
 - **[OGC API - Features - 1]** - OGC API - Features - Part 1: Core<sup> 2</sup>
 - **[OGC API - Features - 2]** - OGC API - Features - Part 2: Coordinate Reference Systems by Reference
@@ -71,9 +70,9 @@ _TO_BE_REVIEW_
 <!-- Second parts of the reference-style links, see also https://www.markdownguide.org/basic-syntax/#reference-style-links  -->
 [IRs for NS]: https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02009R0976-20141231&from=EN "Implementing Rules for Network Services (consolidated version of 31/12/2014)"
 [IRs for ISDSS]: https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02010R1089-20141231&from=EN "Implementing Rules for interoperability of spatial data sets and services (consolidated version of 31/12/2014)"
-[INSPIRE MD TG v2.0.1]: https://inspire.ec.europa.eu/id/document/tg/metadata-iso19139
-[INSPIRE NS - Download Service TG]: https://inspire.ec.europa.eu
-[INSPIRE NS - View Service TG]: https://inspire.ec.europa.eu
+[INSPIRE MD TG]: https://inspire.ec.europa.eu/id/document/tg/metadata-iso19139
+[INSPIRE NS - Download Service TG]: https://inspire.ec.europa.eu/documents/technical-guidance-implementation-inspire-download-services
+[INSPIRE NS - View Service TG]: https://inspire.ec.europa.eu/documents/technical-guidance-implementation-inspire-view-services-1
 [OGC API - Features - 1]: http://docs.opengeospatial.org/is/17-069r3/17-069r3.html "OGC API - Features - Part 1: Core"
 [OGC API - Features - 2]: http://docs.opengeospatial.org/is/18-058/18-058.html "OGC API - Features - Part 2: Coordinate Reference Systems by Reference"
 [OpenAPI 3.0]: http://spec.openapis.org/oas/v3.0.3 "OpenAPI Specification 3.0"
@@ -90,7 +89,6 @@ For the purposes of this document, the following terms and definitions apply:
 | --- | --- | --- |
 | content negotiation | The practice of providing multiple representations available via the same URI | [ISO/IEC 19788](https://www.iso.org/obp/ui/#iso:std:iso-iec:19788:-7:ed-1:v1:en:sec:3.20) |
 | data set | Identifiable collection of data. | [ISO 19115](https://www.iso.org/obp/ui/#iso:std:iso:19115:-2:ed-2:v1:en:sec:3.6) |
-| distribution (of a data set) | A specific representation of a data set. A data set might be available in multiple serializations that may differ in various ways, including natural language, media-type or format, schematic organization, temporal and spatial resolution, level of detail or profiles (which might specify any or all of the above). | [DCAT](https://www.w3.org/TR/vocab-dcat-2/#Class:Distribution) |
 | direct access download service | Download Service which provides access to the Spatial Objects in Spatial Data Sets based upon a query | \[[IRs for NS]\] |
 | encoding | Conversion of data into a series of codes. | [ISO 19118](https://www.iso.org/obp/ui/#iso:std:iso:19118:ed-2:v1:en:term:4.13) |
 | encoding rule | Identifiable collection of conversion rules that define the encoding for a particular data structure. | [ISO 19118](https://www.iso.org/obp/ui/#iso:std:iso:19118:ed-2:v1:en:term:4.14) |
