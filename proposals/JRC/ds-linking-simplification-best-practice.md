@@ -130,9 +130,9 @@ _Insert here diagrams and figures to illustrate the link relation to be used._
 
 ![Diagram B](figures/diagramB.png)
 
-## 8. Conformance classes <a name="recs"></a>
+## 8. Conformance classes <a name="ccs"></a>
  
-### 8.1. Conformance class “INSPIRE-data-set-metadata-resource-locator”  <a name="rec-dsmd-rl-dw"></a>
+### 8.1. Conformance class “INSPIRE-data-set-metadata-resource-locator”  <a name="cc-ds-md-rl"></a>
 
 | Conformance class | http://inspire.ec.europa.eu/id/spec/ds-linking-simplification/1.0/ds-md-resource-locator |
 | --- | --- |
@@ -149,10 +149,19 @@ Furthermore, it suggests that at least two locators need to be expressed in the 
 
 The following requirements are also an enforcement of **TG Recommendation 1.9** in [INSPIRE MD TG] for the metadata record.
 
-This conformance class requires that the ResourceLocator element shall point to the set of additional information about a service resource (ie. Get Download/View Service Metadata).
-The presence of additional ResourceLocator elements, pointing to the data itself (eg. "Get Spatial Data Set" request of a Download Service), is permitted.
+This conformance class requires that the ResourceLocator element shall point to the set of additional information about a service resource (ie. "Get Download/View Service Metadata" operation).
 
 This conformance class requires the presence of `<gmd:protocol>` and `<gmd:applicationProfile>`: by using these two elements, paired with the defined codelist from the central INSPIRE Registry, it would imply that you are fulfilling this portion of the simplification described here.
+
+The presence of additional ResourceLocator elements, pointing to the data itself (eg. "Get Spatial Data Set" request of a Download Service), is permitted, due to the multiplicity expressed by the **TG Requirement 1.8**. Consequently, these additional ResourceLocator elements should avoid at least the use of the `<gmd:applicationProfile>` element, specified below, in order to reduce the complexity of a machine-to-machine element recognition made by an INSPIRE software implementation (eg. INSPIRE Geoportal).
+
+### Use of \<gmd:URL\> element
+
+- Within this element, the URL shall point to the response of a "Get View/Download Service Metadata" request of the service providing access to this data set (eg. the "GetCapabilities" document in case of a OGC:WFS service).
+
+| **Requirement** | **/req/resource-locator-url** |
+| --- | --- |
+| A | The element `URL` SHALL point to the response of a "Get View/Download Service Metadata' request. |
 
 ### Use of \<gmd:protocol\> element
 
@@ -168,14 +177,14 @@ This conformance class requires the presence of `<gmd:protocol>` and `<gmd:appli
 | C | The element `protocol` SHOULD be encoded with `gmx:Anchor`. The attribute `xlink:href` should point to a valid unique resource identifier of the mentioned codelist. The text value should match the related codelist label, expressed in the metadata language. |
 | D | The element `protocol` MAY be encoded with `gco:CharacterString`. The text value SHALL match the related codelist label, expressed in the metadata language. |
 
-#### Example of a `<gmx:Anchor>` encoding for a View Service locator
+#### Example of a View Service locator with `<gmx:Anchor>` encoding
 ```xml
 <gmd:protocol>
     <gmx:Anchor xlink:href="http://www.opengis.net/def/serviceType/ogc/wms">wms</gmx:Anchor>
 </gmd:protocol>
 ```
 
-#### Example of a `<gco:CharacterString>` encoding for a View Service locator
+#### Example of a View Service locator with `<gco:CharacterString>` encoding
 ```xml
 <gmd:protocol>
     <gco:CharacterString>wms</gco:CharacterString>
@@ -191,152 +200,52 @@ This conformance class requires the presence of `<gmd:protocol>` and `<gmd:appli
 
 | **Requirement** | **/req/resource-locator-application-profile** |
 | --- | --- |
-| A | The element `protocol` SHALL be present in the Resource Locator. |
-| B | The element `protocol` SHALL use the values from the following codelist: `https://inspire.ec.europa.eu/metadata-codelist/ProtocolValue`. |
-| C | The element `protocol` SHOULD be encoded with `gmx:Anchor`. The attribute `xlink:href` should point to a valid unique resource identifier of the mentioned codelist. The text value should match the related codelist label, expressed in the metadata language. |
-| D | The element `protocol` MAY be encoded with `gco:characterString`. The text value SHALL match the related codelist label, expressed in the metadata language. |
+| A | The element `applicationProfile` SHALL be present in the Resource Locator. |
+| B | The element `applicationProfile` SHALL use the values from the following codelist: `https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType`. |
+| C | The element `applicationProfile` SHOULD be encoded with `gmx:Anchor`. The attribute `xlink:href` should point to a valid unique resource identifier of the mentioned codelist. The text value should match the related codelist label, expressed in the metadata language. |
+| D | The element `applicationProfile` MAY be encoded with `gco:characterString`. The text value SHALL match the related codelist label, expressed in the metadata language. |
 
-#### Example
+#### Example of a Download Service locator with `<gmx:Anchor>` encoding
 ```xml
-<gmd:protocol>
-    <gmx:Anchor xlink:href="http://www.opengis.net/def/serviceType/ogc/wms">wms</gmx:Anchor>
-</gmd:protocol>
+<gmd:applicationProfile>
+    <gmx:Anchor xlink:href="https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download">Downloaddienst</gmx:Anchor>
+</gmd:applicationProfile>
 ```
 
-#### Linkage to a INSPIRE Download Service (Get Service Metadata)
+#### Example of a Download Service locator with `<gco:CharacterString>` encoding
+```xml
+<gmd:applicationProfile>
+    <gco:CharacterString>Downloaddienst</gco:CharacterString>
+</gmd:applicationProfile>
+```
 
-| **Recommendation** | **/rec/download-linkage** |
+#### Linkage to a INSPIRE Download Service
+
+| **Requirement** | **/req/download-linkage** |
 | --- | --- |
-| A | The locator to an INSPIRE Download Service SHALL point to the Service Metadata (eg. OGC GetCapabilities) response of the associated INSPIRE Download Service. The Resource Locator SHALL have `URL`, `protocol` and `applicationProfile` elements. |
+| Definition | The ResourceLocator to an INSPIRE Download Service SHALL point to the Service Metadata (eg. GetCapabilities) response of the associated INSPIRE Download Service. The Resource Locator SHALL present the elements `URL`, `protocol` and `applicationProfile`, properly encoded. |
+| Dependency |  **/req/resource-locator-url** <br> **/req/resource-locator-protocol**<br> **/req/resource-locator-application-profile** |
 
-#### Linkage to a INSPIRE View Service (Get Service Metadata)
+For an example of this linkage requirement, see [Annex A: Examples](#annex-a)
 
-| **Recommendation** | **/rec/view-linkage** |
+#### Linkage to a INSPIRE View Service
+
+| **Requirement** | **/req/view-linkage** |
 | --- | --- |
-| A | The Resource Locator SHALL have `URL`, `protocol` and `applicationProfile` elements. |
+| Definition |The ResourceLocator to an INSPIRE View Service SHALL point to the Service Metadata (eg. GetCapabilities) response of the associated INSPIRE View Service. The Resource Locator SHALL present the elements `URL`, `protocol` and `applicationProfile`, properly encoded. |
+| Dependency |  **/req/resource-locator-url** <br> **/req/resource-locator-protocol**<br> **/req/resource-locator-application-profile** |
 
-| **Recommendation** | **/rec/pre-defined/collection-naming** |
+For an example of this linkage expression, see [Annex A: Examples](#annex-a)
+
+### 8.2. Conformance class “INSPIRE-service-metadata-coupled-resource”  <a name="cc-ns-md-cr"></a>
+
+| Conformance class | http://inspire.ec.europa.eu/id/spec/ds-linking-simplification/1.0/ns-md-coupled-resource |
 | --- | --- |
-| A | For each `collection` that provides data that is harmonised according to the \[[IRs for ISDSS]\], the id of the collection SHOULD be the lowercase version of the language-neutral name of the feature type as specified in the \[[IRs for ISDSS]\]. | 
-
-| **Recommendation** | **/rec/pre-defined/license-openapi** |
-| --- | --- |
-| A | The licence information for the exposed data set SHOULD be provided in accordance with [OpenAPI 3.0]. |
-
-### 8.2. Service Metadata <a name="req-multilinguality"></a>
-
-| Requirements class | http://inspire.ec.europa.eu/id/spec/oapif-download/1.0/req/multilinguality |
-| --- | --- |
-| Target type | Web API |
-| Dependency | [INSPIRE-pre-defined-data-set-download-OAPIF](#req-pre-defined) |
-
-This requirements class is mandatory for all data sets that contain information in more than one natural language. For a data set containing textual information, the language used in the data set is given in the [Resource Language metadata element](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02008R1205-20081224&from=EN#tocId19).
-
-**PRECONDITION TESTS**
-1. For the document retrieved in the test for /req/pre-defined/spatial-data-set-metadata, check whether more than one Resource Language is provided. See also https://github.com/inspire-eu-validation/metadata/blob/2.0/datasets-and-series/resource-language.md
-
-The requirements from the \[[IRs for NS]\] to support requests in different natural languages are met in the Web API through HTTP language negotiation, using HTTP headers as specified in [RFC 7231], language tags as specified in [RFC 5646] and matching of language tags as specified in [RFC 4647].
-
-| **Requirement** | **/req/multilinguality/accept-language-header** |
-| --- | --- |
-| A | The Web API SHALL support the `Accept-Language` HTTP header in requests to the landing page (`/`), `/collections`, `/collections/{collectionId}`, `/collections/{collectionId}/items` and `/collections/{collectionId}/items/{featureId}` in accordance with [RFC 7231], [RFC 5646] and [RFC 4647].|
-
-**TEST**
-1. Issue an HTTP GET request with an `Accept-Language` HTTP header that contains a valid language priority list (prioritized or weighted list of language ranges, see [RFC 4647]) that does not contain `*;q=0.0` to the following URLs: `{root}/` and `{root}/collections`. For every feature collection identified in the response of `{root}/collections`, issue an HTTP request with an `Accept-Language` HTTP header containing a valid language priority list that does not contain `*;q=0.0` to the following URLs: `{root}/collections/{collectionId}`, `{root}/collections/{collectionId}/items?limit=5`.
-2. For every response, validate that the HTTP status code is 200.
-
-| **Recommendation** | **/rec/multilinguality/accept-language-header-no-matching-language-tag** |
-| --- | --- |
-| A | The Web API SHOULD return either HTTP status code 200 or HTTP status code 406 (Not Acceptable) when none of the available representations for the response have a language tag that matches the `Accept-Language` HTTP header given by the client. |
-| B | The Web API SHOULD return a representation in the default language when the returned HTTP status code is 200. |
-| C | The Web API SHOULD return a response with a response body containing a list of all supported languages when the returned HTTP status code is 406. |
-
-An `Accept-Language` HTTP header that contains `*;q=0.0`, e.g. `en;q=1.0,*;q=0.0`, tells the server that the client is only willing to accept certain languages, e.g. only English in the given example. According to [RFC 7231], in the case that the server cannot honour the clients request, the server "can either disregard the header field by treating the response as if it is not subject to content negotiation or honor the header field by sending a 406 (Not Acceptable) response". Guidelines on what option to choose depend on the context, see also [Annex D: Supported languages](#supported-lang).
+| Target type | Service metadata |
+| Dependency | N/A |
 
 
 
-| **Requirement** | **/req/multilinguality/content-language-root** |
-| --- | --- |
-| A | The Web API SHALL include the `Content-Language` HTTP header in the response for a request to its landing page `(/)` in accordance with [RFC 7231] and [RFC 5646]. |
-
-**TEST**
-1. Issue an HTTP GET request with an `Accept-Language` HTTP header containing a valid language priority list to URL `{root}/`.
-2. Validate that a response is returned with a `Content-Language` HTTP header.
-3. Issue an HTTP GET request without a `Accept-Language` HTTP header to URL `{root}/`.
-4. Validate that a response is returned with a `Content-Language` HTTP header.
-
-| **Recommendation** | **/rec/multilinguality/content-negotiation** |
-| --- | --- |
-| A | The Web API SHOULD take the language specified in the `Accept-Language` HTTP header of a request to all paths into account. The Web API SHOULD include the `Content-Language` HTTP header in the response for a request to all paths in accordance with [RFC 7231] and [RFC 5646]. |
-
-| **Requirement** | **/req/multilinguality/hreflang** |
-| --- | --- |
-| A | A link with the link relation type `enclosure` SHALL include the `hreflang` link parameter containing the language of that distribution. The value of `hreflang` SHALL be in accordance with [RFC 4647]. |
-
-**TEST**
-
-1. Issue an HTTP GET request to `{root}/collections`.
-2. For each of the links returned in the response having a `rel` link parameter equal to `enclosure`, validate that the `hreflang` parameter is present.
-3. Check that the `hreflang` parameter contains a language encoded in accordance with [RFC 4647].
-
-### 8.3. Requirements class “INSPIRE-OAPIF-GeoJSON” <a name="req-oapif-json"></a>
-
-| Requirements class | http://inspire.ec.europa.eu/id/spec/oapif-download/1.0/req/geojson |
-| --- | --- |
-| Target type | Web API |
-| Dependency | [INSPIRE-pre-defined-data-set-download-OAPIF](#req-pre-defined)  |
-| Dependency | [OAPIF requirements class GeoJSON](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_geojson)  |
-
-This requirements class is relevant when providing access to INSPIRE data encoded as (Geo-)JSON (e.g. by following the approach defined in [INSPIRE action 2017.2](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?pageId=277742184) for 'Addresses' and 'Environmental Monitoring Facilities').
-
-| **Recommendation** | **/rec/geojson/geojson-inspire** |
-| --- | --- |
-| A | The GeoJSON encoding rule used for each feature collection and the features it contains SHOULD be documented in accordance with the guidelines in the [repository for alternative encodings](https://github.com/INSPIRE-MIF/2017.2) and SHOULD be based on model transformations and conversion rules documented in that repository if the feature collection provides data that are harmonised according to the \[[IRs for ISDSS]\]. |
-
-Note that in order to conform to the legal requirements of INSPIRE, any encoding rule used must be properly documented, see also [Article 7](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02010R1089-20141231&qid=1604512031742&from=EN#tocId9) in the \[[IRs for ISDSS]\].
-
-### 8.4. Requirements class “INSPIRE-bulk-download” <a name="req-bulk-download"></a>
-
-| Requirements class | http://inspire.ec.europa.eu/id/spec/oapif-download/1.0/req/bulk-download |
-| --- | --- |
-| Target type | Web API |
-| Dependency | [INSPIRE-pre-defined-data-set-download-OAPIF](#req-pre-defined)  |
-
-This requirements class implements the recommendation from \[DWBP\] to provide a [bulk download](https://www.w3.org/TR/dwbp/#BulkAccess) of a dataset, to enable consumers to retrieve the full dataset through a single request. It therefore allows for providing datasets that meet the Open Definition \[OD\] \[Dodd16\].
-
-| **Requirement** | **/req/pre-defined/enclosure** |
-| --- | --- |
-| A | At least one of the following conditions SHALL be met:<br>1. The response of the `/collections` operation includes at least one `enclosure` link that allows requesting a representation of the entire data set.<br>2. The response of each `/collections/{collectionId}` operation includes at least one `enclosure` link that allows requesting a representation of the entire feature collection. |
-
-**TEST**
-
-1. Issue an HTTP GET request to {root}/collections and to each {root}/collections/{collectionId}.
-2. Validate that the Collections response and/or each of the Collection responses have a link with the `rel` link parameter `enclosure`.
-3. For each of the links returned in the response having a `rel` link parameter equal to `enclosure`, issue an HTTP HEAD request to the path given in the `href` link parameter of that link.
-4. For each of the responses:
-    - If the HTTP status code is 405 (Method Not Allowed), the test verdict is inconclusive.
-    - If HTTP status code 200 is returned and HTTP header` Content-Length` > 0, the test verdict is “pass”.
-    - Otherwise, the test verdict is “fail”.
-
-| **Requirement** | **/req/pre-defined/enclosure-type** |
-| --- | --- |
-| A | A link with the relation type `enclosure` SHALL include the `type` link parameter containing a type which is included in the [INSPIRE media-types register](https://inspire.ec.europa.eu/media-types). |
-
-**TEST**
-1. Issue an HTTP GET request to `{root}/collections`.
-2. For each of the links returned in the response having a `rel` link parameter equal to `enclosure`, validate that the `type` parameter is present and the media type is valid according the [INSPIRE media-types register](https://inspire.ec.europa.eu/media-types).
-
-
-**NOTE** Requirements for downloads of a whole data set available in more than one natural language are included in the requirements class INSPIRE-multilinguality.
-
-
-| **Recommendation** | **/rec/pre-defined/enclosure-length** |
-| --- | --- |
-| A | A link with the link relation type `enclosure` SHOULD include the `length` link parameter containing the length in bytes. |
-
-| **Recommendation** | **/rec/pre-defined/enclosure-title** |
-| --- | --- |
-| A | The link(s) with the link relation type `enclosure` SHOULD include the `title` link parameter. |
 
 ### 8.5. Recommendation id “INSPIRE-NS-Atom-Service-CoupledResource” <a name="rec-atom-service"></a>
 
@@ -376,9 +285,7 @@ _TO_BE_REVIEW_
 The following collection shows a series of XML snippets.
 _These examples are purely informative and do not constitute a reference definition of a conformant metadata._
 
-#### Snippet of Resource Locator of a dataset metadata linking to an INSPIRE View Service - Get View Service Metadata
-
-_Note: for the definition of a WMTS service, use the proper codelist defined before inside the `protocol` element_
+#### Resource Locator of a dataset metadata linking to an INSPIRE View Service - Get View Service Metadata
 
 ```xml
 <gmd:transferOptions>
