@@ -18,14 +18,12 @@ _TO_BE_REVIEW_
     * [7.1. Main principles](#main-principles)
     * [7.2. From the definition to the data](#def-to-data)
     * [7.3. From the data to the definition](#data-to-def)
-* [8. Recommendations](#recs)
-    * [8.1. Recommendation “INSPIRE-Dataset-Metadata-ResourceLocator”](#rec-ds-md-resloc)
-    * [8.2. Recommendation “INSPIRE-NS-CoupledResource”](#rec-ns-coupled-res)
-* [9. Example](#example)
+* [8. Conformance classes](#ccs)
+    * [8.1. Conformance class: “INSPIRE-Data-set-Metadata-Resource-Locator”](#cc-ds-md-resloc)
+    * [8.2. Conformance class: “INSPIRE-Network-Service-Metadata-Coupled-Resource”](#cc-ns-md-coupledres)
+*  [9. Future developments](#future-dev)
 * [10. Bibliography](#bibliography)
 * [Annex A: Examples](#annex-a)
-* [Annex B: template](#annex-b)
-* [Annex C: template](#annex-c)
 
 ## 1. Introduction <a name="introduction"></a>
 
@@ -131,8 +129,8 @@ _Insert here diagrams and figures to illustrate the link relation to be used._
 ![Diagram B](figures/diagramB.png)
 
 ## 8. Conformance classes <a name="ccs"></a>
- 
-### 8.1. Conformance class “INSPIRE-data-set-metadata-resource-locator”  <a name="cc-ds-md-rl"></a>
+
+### 8.1. Conformance class: “INSPIRE-Data-set-Metadata-Resource-Locator”  <a name="cc-ds-md-resloc"></a>
 
 | Conformance class | http://inspire.ec.europa.eu/id/spec/ds-linking-simplification/1.0/ds-md-resource-locator |
 | --- | --- |
@@ -237,7 +235,7 @@ For an example of this linkage requirement, see [Annex A: Examples](#annex-a)
 
 For an example of this linkage expression, see [Annex A: Examples](#annex-a)
 
-### 8.2. Conformance class “INSPIRE-service-metadata-coupled-resource”  <a name="cc-ns-md-cr"></a>
+### 8.2. Conformance class: “INSPIRE-Network-Service-Metadata-Coupled-Resource”  <a name="cc-ns-md-coupledres"></a>
 
 | Conformance class | http://inspire.ec.europa.eu/id/spec/ds-linking-simplification/1.0/ns-md-coupled-resource |
 | --- | --- |
