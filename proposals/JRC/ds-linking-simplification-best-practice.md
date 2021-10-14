@@ -43,6 +43,10 @@ _TO_BE_REVIEW_
 
 The scope of this document is to provide a well-defined series of opinionated interpretations and rules (that de facto standard web applications can currently support), based on the current list of Requirements and Recommendations expressed in the INSPIRE Technical Guidance documents.
 
+The recommendations expressed here apply to the data set and service metadata records, as well as to the service (capabilities) documents.
+In particular, the data set and service metadata records must be available in the relevant national geoportal (see https://inspire.ec.europa.eu/INSPIRE-in-your-Country), must be harvested by the [INSPIRE Geoportal](https://inspire-geoportal.ec.europa.eu) and must be INSPIRE-compliant.
+
+
 ## 3. Conformance <a name="conformance"></a>
 
 _TODO_
@@ -158,38 +162,29 @@ The figures below illustrate the resources defined by OGC API – Features, and 
 
 ## 8. Recommendations <a name="recs"></a>
  
-### 8.1. Requirements class “INSPIRE-pre-defined-data-set-download-OAPIF”  <a name="req-pre-defined"></a>
+### 8.1. Recommendation id “INSPIRE-data-set-metadata-resource-locator”  <a name="rec-dsmd-rl-dw"></a>
 
-| Requirements class | http://inspire.ec.europa.eu/id/spec/oapif-download/1.0/req/pre-defined |
+| Recommendation class | http://inspire.ec.europa.eu/id/spec/ds-linking-simplification/1.0/ds-md-resource-locator |
 | --- | --- |
-| Target type | Web API |
-| Dependency | [OAPIF Requirements class "OpenAPI 3.0"](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_openapi_3_0) |
+| Target type | Data set metadata |
+| Dependency | N/A |
 
-The Web API depends on the [OAPIF Requirements class OpenAPI 3.0](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_openapi_3_0), and therefore also on the [OAPIF Requirements class Core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_core), for providing access to INSPIRE data.
+The Resource Locator of a metadata record shall point users to the location (URL) where the service can be contacted. 
 
-**NOTE 1** The Web API shall return collections and features in the default OAPIF coordinate reference system (WGS 84 longitude and latitude). However, the `enclosure` link for bulk download could still provide access to a data set in a different CRS.
+Setting up the correct resource locators is important for the connection between the data and the services that provide access to them or for providing additional information concerning the resource.
 
-**NOTE 2** In the OAPIF standard, the [OpenAPI 3.0 Requirements class](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_requirements_class_openapi_3_0) is optional. This specification proposes to make it a mandatory requirement for INSPIRE in order to facilitate the development of client applications, and in particular adding support in the [European INSPIRE geoportal](https://inspire-geoportal.ec.europa.eu). That is why, the Web API SHALL comply with OAPIF requirements class OpenAPI 3.0.
+In particular, the **TG Requirement 1.8** in [INSPIRE MD TG] express the obligation of providing online access to the described data set or data set series.
+The element presents multiplicity [0..n] so this recommendation suggest that at least two locators need to be expressed in the metadata: one for a Download Service, one for a View Service.
+The element shall point to the set of additional information about a service resource (Get Service Metadata) and eventually, the presence of additional ResourceLocator elements (pointing to the data itself, eg. Get Data Set Spatial Object for a Download Service) are permitted.
 
+**NOTE** 
+The following recommendations are also an enforcement of **TG Recommendation 1.8** and **TG Recommendation 1.9** in [INSPIRE MD TG] for the metadata record.
 
-**NOTE 3** In accordance with the security requirements of the [OpenAPI 3.0 Requirements class](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#security), for cases where the operations of the server are access-controlled, the security scheme(s) SHALL be documented in the OpenAPI definition.
+#### Linkage to a INSPIRE Download Service (Get Service Metadata)
 
-**NOTE 4** There are plans to add additional requirements classes for other API description standards (or standard versions) in the future (e.g. for OpenAPI v3.1). When additional requirements classes become available, this specification will be reviewed and possibly revised to include these as additional options.
-
-**NOTE 5** For cases where data sets are too big for retrieval with a single API request, using multiple requests following the `next` links (paging) [TODO: add link that explains paging] is considered to meet the requirements for a download service. This will also help to support frequently updated data sets.
-
-**NOTE 6** To support browser-based applications accessing the API directly, it is common practice to support [cross-origin requests](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0#cross_origin).
-
-
-#### Metadata elements of the data set
-
-| **Requirement** | **/req/pre-defined/spatial-data-set-metadata** |
+| **Recommendation** | **/rec/download-linkage** |
 | --- | --- |
-| A | The response of the `/collections` operation SHALL include a link to the metadata record for the data set. This link SHALL have `rel` link parameter `describedby` and `type` link parameter `application/xml`. |
-
-**NOTE** This is an enforcement of recommendation [http://www.opengis.net/spec/ogcapi-features-1/1.0/rec/core/fc-md-descriptions](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#rec_core_fc-md-descriptions) in [OGC API - Features - 1] for the metadata record.
-
-The data set metadata record must be available in the relevant national geoportal (see https://inspire.ec.europa.eu/INSPIRE-in-your-Country), must be harvested by the [INSPIRE Geoportal](https://inspire-geoportal.ec.europa.eu) and must be INSPIRE-compliant. However, this is out of scope for this specification. Note that often the person responsible for the metadata is not the same as the person responsible for the Web API.
+| A | The locator to an INSPIRE Download Service SHALL point to the Service Metadata (eg. OGC GetCapabilities) response of the associated INSPIRE Download Service. The Resource Locator SHALL have `URL`, `protocol` and `applicationProfile` elements. |
 
 **TEST**
 1. Issue an HTTP GET request to {root}/collections.
@@ -370,6 +365,8 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
 
 ### 8.5. Recommendation id “INSPIRE-NS-Atom-Service-CoupledResource” <a name="rec-atom-service"></a>
 
+_TO_BE_REVIEW_ in particular, how to express a CoupledResource in a ATOM feed
+
 | Recommendation class | http://inspire.ec.europa.eu/id/spec/ds-linking-simplification/1.0/ |
 | --- | --- |
 | Target type | ATOM Top Feed definition |
@@ -378,15 +375,16 @@ This requirements class implements the recommendation from \[DWBP\] to provide a
 
 | **Recommendation** | **/rec/atom-service/coupled-resource** |
 | --- | --- |
-| A | For each sub-feed collection in the feed, it shall exist at least one metadataURL pointing to the data set metadata definition available in a Discovery Service catalog. |
+| A | For each data set feed collection in the top feed, it shall exist at least one metadataURL pointing to the data set metadata definition available in a Discovery Service catalog. |
 
 
 ## 9. Future developments <a name="future-dev"></a>
 
-Within this document, the choosen approach highlights the possibility of a further simplification on a broader level of the INSPIRE implementation.
-For instance, the more direct connection expressed with these recommendations could suggest the implementation of a Scenario 2, which requirements and definitions are already provided in both the [INSPIRE DW TG] and [INSPIRE VW TG] documents.
-Furthermore, the implementation of the Scenario 2 could offer the opportunity of a revision of the mapping of the INSPIRE requirements, currently expressed in the Extended Capabilities section.
-
+Within this document, the series of recommendations imply the possibility of further simplifications, on a broader level about the INSPIRE implementation.
+Note that often the person or organization responsible for the metadata is not the same as the responsible for the service operations. This can lead to duplication, errors and/or outdated set of information.
+For instance, the more direct connection expressed with these recommendations could suggest the implementation of a [Scenario 2], which requirements and definitions are already provided in both the [INSPIRE NS - Download Service TG] and [INSPIRE NS - View Service TG] documents.
+In this case, the service metadata is no longer required (at least, for this linkage simplification purpose) and so its creation can be skipped, or automated by dedicated features of a software implementation of the INSPIRE Discovery Service.
+Furthermore, the implementation of the above mentioned [Scenario 2] could offer the opportunity of a revision of the mapping of the INSPIRE requirements, currently expressed in the Extended Capabilities section, since the current lack of support of that vendor section in some (especially commercial) software implementation of OGC service.
 
 ## 10. Bibliography <a name="bibliography"></a>
 
@@ -576,7 +574,7 @@ _Note: this example covers the WFS definition. For a WCS/SOS service, use the pr
 ```
 
 # Annex B: template <a name="annex-b"></a>
-_TO_BE_DONE_
+_TO_BE_REVIEW_
 
 # Annex C: template  <a name="annex-c"></a>
-_TO_BE_DONE_
+_TO_BE_REVIEW_
