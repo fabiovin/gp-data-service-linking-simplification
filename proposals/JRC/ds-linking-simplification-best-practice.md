@@ -40,21 +40,17 @@ The reference for the metadata specification used in this proposal is the [INSPI
 ## 2. Scope <a name="scope"></a>
 
 _TO_BE_REVIEW_
-
 The scope of this document is to provide a well-defined series of opinionated interpretations and rules (that de facto standard web applications can currently support), based on the current list of Requirements and Recommendations expressed in the INSPIRE Technical Guidance documents.
-
-The recommendations expressed here apply to the data set and service metadata records, as well as to the service (capabilities) documents.
-In particular, the data set and service metadata records must be available in the relevant national geoportal (see https://inspire.ec.europa.eu/INSPIRE-in-your-Country), must be harvested by the [INSPIRE Geoportal](https://inspire-geoportal.ec.europa.eu) and must be INSPIRE-compliant.
-
 
 ## 3. Conformance <a name="conformance"></a>
 
-_TODO_
+_TO_BE_REVIEW_
+The recommendations expressed here apply to the data set and service metadata records, as well as to the service (capabilities) documents.
+In particular, the data set and service metadata records must be INSPIRE-compliant (through the Reference Validator), should be available in the relevant national geoportal catalog (see https://inspire.ec.europa.eu/INSPIRE-in-your-Country), and they should be harvested by the [INSPIRE Geoportal](https://inspire-geoportal.ec.europa.eu).
 
 ## 4. Normative references <a name="normative-references"></a>
 
 _TO_BE_REVIEW_
-
 - **[ISO 19115-2:2019](https://schemas.isotc211.org/schemas/19115/-2/gmi/1.0/gmi.xsd)** - ISO 19115-2:2019, *Geographic information — Metadata — Part 2: Extensions for acquisition and processing*
 - **[ISO/TS 19139:2007](https://www.isotc211.org/2005/gmd/)** - ISO/TS 19139:2007, *Geographic information — Metadata — XML schema implementation*
 - **[IRs for NS]** - Commission Regulation (EC) No 976/2009 of 19 October 2009 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards the Network Services
@@ -86,7 +82,6 @@ _TO_BE_REVIEW_
 ## 5. Terms and definitions <a name="terms-and-definitions"></a>
 
 _TO_BE_REVIEW_
-
 For the purposes of this document, the following terms and definitions apply:
 
 | Term | Definition | Source |
@@ -100,7 +95,6 @@ For the purposes of this document, the following terms and definitions apply:
 | feature collection | A set of features from a data set. | [OGC API - Features - 1](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_feature_collection) |
 | feature type | **NOTE** The concept of a `feature type` is synonymous to a `spatial object type` in INSPIRE | [INSPIRE](https://inspire.ec.europa.eu/glossary/SpatialObject) |
 | pre-defined data set download service | Service that enables copies of spatial data sets, or parts of such sets, to be downloaded. | \[[IRs for NS]\] |
-| Web API | API using an architectural style that is founded on the technologies of the Web. | [DWBP](https://www.w3.org/TR/dwbp) |
 
 
 **NOTE** ISO and the European Commission maintain comprehensive terminological databases at the following addresses:
@@ -113,10 +107,10 @@ _TO_BE_REVIEW_
 
 | Abbreviation | Term |
 | --- | --- |
-| API |    Application Programming Interface |
+| API | Application Programming Interface |
 | GML | Geography Markup Language |
 | OAPIF | OGC API - Features |
-| URL |    Uniform Resource Locator |
+| URL | Uniform Resource Locator |
 | WFS | Web Feature Service |
 | WMS | Web Map Service |
 | WMTS | Web Map Tile Service |
@@ -125,46 +119,22 @@ _TO_BE_REVIEW_
 
 ### 7.1. Main principles <a name="main-principles"></a>
 
-- A Web API provides data from one data set. This means that one data publisher often will need to provide more than one Web API.<sup> [3](#footnote3)</sup>
-- The exact composition of a data set is determined by the data publisher. It may be that the data set contains all that publishers’ information on one INSPIRE theme, but other compositions are allowed.
-- A data set is structured into one or several feature collections. Аll feature collections available in one API (under the `/collections` path) are considered to be part of the data set provided by that Web API.
-- A feature collection contains features of only one feature type.
-
-For example, two data sets (with their own metadata records), one on buildings and one on addresses will have two landing pages (https://developer.my-org.eu/apis/addresses/ and https://developer.my-org.eu/apis/buildings/) rather than one landing page for the Web API (https://developer.my-org.eu/apis/oapif/) and two feature collections, one for each data set (https://developer.my-org.eu/apis/oapif/collections/addresses and https://developer.my-org.eu/apis/oapif/collections/buildings).
-
-The mapping between INSPIRE resources and [OAPIF resources](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#table_1) is given below, for an example data set containing addresses <sup> [5](#footnote5)</sup>.
-
-| INSPIRE resource | OAPIF resource | Sample path | Document reference |
-| ------------- | ------------- | ------------- |-------------: |
-| (Distribution<sup> 4</sup> of a) data set | Landing page | `https://developer.my-org.eu/apis/addresses/` | [OAPIF 7.2 API landing page](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_api_landing_page) |
-| Data set metadata | Feature collections | `https://developer.my-org.eu/apis/addresses/collections/` | [OAPIF 7.13 Feature collections](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collections_) |
-| -- | Feature collection | `https://developer.my-org.eu/apis/addresses/collections/address` | [OAPIF 7.14 Feature collection](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collection_) |
-| Spatial objects | Features | `https://developer.my-org.eu/apis/addresses/collections/address/items` | [OAPIF 7.15 Features](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_items_) |
-| Spatial object | Feature | `https://developer.my-org.eu/apis/addresses/collections/address/items/{featureId}` | [OAPIF 7.16 Feature](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_feature_) |
-
-<sup id="footnote3">3 </sup>The principle that a Web API provides data from one data set is in line with OGC API - Features - Part 1: Core, as illustrated by the quotes below. As long as no other parts for OGC API - Features are defined that support multiple datasets, INSPIRE adheres to this principle.
-
-> By default, every API implementing this standard will provide access to a single dataset.
-
-> A server that implements this conformance class provides access to the features in a dataset. In other words, the API is a distribution of that dataset. A file download, for example, would be another distribution.
-
-<sup>4 </sup>The notion of a distribution is not present in the INSPIRE legislation, the legislation does not make the distinction between a data set and its distribution(s). However, this distinction is relevant, see also section 4 in \[DWBP\].
-
-<sup id="footnote5">5 </sup> See the [overview page of OGC API - Features implementations](https://github.com/opengeospatial/ogcapi-features/blob/master/implementations.md) and the [overview page of the Good Practice implementations](../deployments) for existing implementations.
+- A data set shall point to the INSPIRE Network Services, such as Download and View Service.
+- The linkage shall be ensured by the bidirectional relationship between the data set metadata and the service metadata.
 
 ### 7.2. Resources <a name="resources"></a>
 
-The figures below illustrate the resources defined by OGC API – Features, and links to external resources that are required by the depicted requirements classes, including the link relation types to be used.
+_Insert here diagrams and figures to illustrate the link relation to be used._
 
-![Resources and relations between them for the INSPIRE core requirements class](figures/resources_core.png)
+![Diagram A](figures/diagramA.png)
 
-![Resources and relations between them for the INSPIRE bulk download requirements class](figures/resources_bulk.png)
+![Diagram B](figures/diagramB.png)
 
-## 8. Recommendations <a name="recs"></a>
+## 8. Conformance classes <a name="recs"></a>
  
-### 8.1. Recommendation id “INSPIRE-data-set-metadata-resource-locator”  <a name="rec-dsmd-rl-dw"></a>
+### 8.1. Conformance class “INSPIRE-data-set-metadata-resource-locator”  <a name="rec-dsmd-rl-dw"></a>
 
-| Recommendation class | http://inspire.ec.europa.eu/id/spec/ds-linking-simplification/1.0/ds-md-resource-locator |
+| Conformance class | http://inspire.ec.europa.eu/id/spec/ds-linking-simplification/1.0/ds-md-resource-locator |
 | --- | --- |
 | Target type | Data set metadata |
 | Dependency | N/A |
@@ -173,12 +143,65 @@ The Resource Locator of a metadata record shall point users to the location (URL
 
 Setting up the correct resource locators is important for the connection between the data and the services that provide access to them or for providing additional information concerning the resource.
 
-In particular, the **TG Requirement 1.8** in [INSPIRE MD TG] express the obligation of providing online access to the described data set or data set series.
-The element presents multiplicity [0..n] so this recommendation suggest that at least two locators need to be expressed in the metadata: one for a Download Service, one for a View Service.
-The element shall point to the set of additional information about a service resource (Get Service Metadata) and eventually, the presence of additional ResourceLocator elements (pointing to the data itself, eg. Get Data Set Spatial Object for a Download Service) are permitted.
+In particular, the **TG Requirement 1.8** in [INSPIRE MD TG] express the obligation of providing online access, if available, to the described data set or data set series.
 
-**NOTE** 
-The following recommendations are also an enforcement of **TG Recommendation 1.8** and **TG Recommendation 1.9** in [INSPIRE MD TG] for the metadata record.
+Furthermore, it suggests that at least two locators need to be expressed in the metadata: one for a Download Service, one for a View Service.
+
+The following requirements are also an enforcement of **TG Recommendation 1.9** in [INSPIRE MD TG] for the metadata record.
+
+This conformance class requires that the ResourceLocator element shall point to the set of additional information about a service resource (ie. Get Download/View Service Metadata).
+The presence of additional ResourceLocator elements, pointing to the data itself (eg. "Get Spatial Data Set" request of a Download Service), is permitted.
+
+This conformance class requires the presence of `<gmd:protocol>` and `<gmd:applicationProfile>`: by using these two elements, paired with the defined codelist from the central INSPIRE Registry, it would imply that you are fulfilling this portion of the simplification described here.
+
+### Use of \<gmd:protocol\> element
+
+- For this element, the central INSPIRE Registry offers a series of external codelist values from the register: https://inspire.ec.europa.eu/metadata-codelist/ProtocolValue
+- Regarding the label of a codelist, the central INSPIRE Registry specifies the text to be use, and this should follow the metadata language.
+- The [INSPIRE MD TG] already recommends the use of element `gmx:Anchor` when the provided text is a term or code, instead of `gco:CharacterString`. This conformance class enforces the use of this element.
+- The existence of element `gco:CharacterString` is permitted only for backward compatibility with an existing ResourceLocator description that might be already compliant with this simplification.
+
+| **Requirement** | **/req/resource-locator-protocol** |
+| --- | --- |
+| A | The element `protocol` SHALL be present in the Resource Locator. |
+| B | The element `protocol` SHALL use the values from the following codelist: `https://inspire.ec.europa.eu/metadata-codelist/ProtocolValue`. |
+| C | The element `protocol` SHOULD be encoded with `gmx:Anchor`. The attribute `xlink:href` should point to a valid unique resource identifier of the mentioned codelist. The text value should match the related codelist label, expressed in the metadata language. |
+| D | The element `protocol` MAY be encoded with `gco:CharacterString`. The text value SHALL match the related codelist label, expressed in the metadata language. |
+
+#### Example of a `<gmx:Anchor>` encoding for a View Service locator
+```xml
+<gmd:protocol>
+    <gmx:Anchor xlink:href="http://www.opengis.net/def/serviceType/ogc/wms">wms</gmx:Anchor>
+</gmd:protocol>
+```
+
+#### Example of a `<gco:CharacterString>` encoding for a View Service locator
+```xml
+<gmd:protocol>
+    <gco:CharacterString>wms</gco:CharacterString>
+</gmd:protocol>
+```
+
+### Use of \<gmd:applicationProfile\> element
+
+- For this element, the central INSPIRE Registry offers the codelist values from the register: https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType
+- Regarding the label of a codelist, the central INSPIRE Registry specifies the text to be use, and this should follow the metadata language.
+- The [INSPIRE MD TG] already recommends the use of element `gmx:Anchor` when the provided text is a term or code, instead of `gco:CharacterString`. This conformance class enforces the use of this element.
+- The existence of element `gco:CharacterString` is permitted only for backward compatibility with an existing ResourceLocator description that might be already compliant with this simplification.
+
+| **Requirement** | **/req/resource-locator-application-profile** |
+| --- | --- |
+| A | The element `protocol` SHALL be present in the Resource Locator. |
+| B | The element `protocol` SHALL use the values from the following codelist: `https://inspire.ec.europa.eu/metadata-codelist/ProtocolValue`. |
+| C | The element `protocol` SHOULD be encoded with `gmx:Anchor`. The attribute `xlink:href` should point to a valid unique resource identifier of the mentioned codelist. The text value should match the related codelist label, expressed in the metadata language. |
+| D | The element `protocol` MAY be encoded with `gco:characterString`. The text value SHALL match the related codelist label, expressed in the metadata language. |
+
+#### Example
+```xml
+<gmd:protocol>
+    <gmx:Anchor xlink:href="http://www.opengis.net/def/serviceType/ogc/wms">wms</gmx:Anchor>
+</gmd:protocol>
+```
 
 #### Linkage to a INSPIRE Download Service (Get Service Metadata)
 
@@ -186,69 +209,21 @@ The following recommendations are also an enforcement of **TG Recommendation 1.8
 | --- | --- |
 | A | The locator to an INSPIRE Download Service SHALL point to the Service Metadata (eg. OGC GetCapabilities) response of the associated INSPIRE Download Service. The Resource Locator SHALL have `URL`, `protocol` and `applicationProfile` elements. |
 
-**TEST**
-1. Issue an HTTP GET request to {root}/collections.
-2. Validate that at least one of the links returned in the response has `rel` link parameter `describedby` and `type` link parameter `application/xml`.
-3. For each of the links returned in the response having a `rel` link parameter `describedby` and `type` link parameter `application/xml`, issue an HTTP HEAD request to the path given in the `href` link parameter of that link.
-4. Validate that for one of the responses the returned XML document satisfies one of the following:
-    - The document has root element `{http://www.opengis.net/cat/csw/2.0.2}GetRecordByIdResponse` followed by element `{http://www.isotc211.org/2005/gmd}MD_Metadata`.
-    - The document has root element `{http://www.isotc211.org/2005/gmd}MD_Metadata`.
-    - The document has root element `{http://standards.iso.org/iso/19115/-2/gmi/1.0}MI_Metadata`.
+#### Linkage to a INSPIRE View Service (Get Service Metadata)
 
-| **Recommendation** | **/rec/pre-defined/spatial-data-set-metadata-html** |
+| **Recommendation** | **/rec/view-linkage** |
 | --- | --- |
-| A | If the API implements the HTML requirements class, the response of the `/collections` operation SHOULD include a link to the metadata record for the data set with `rel` link parameter `describedby` and `type` link parameter `text/html`. |
-
-
-**NOTE** If the data set is available in GML, the link to the GML application schema of the data set will also have `rel` link parameter `describedby` and `type` link parameter `application/xml`.
-
-#### Organisation of a data set in feature collections
-
-| **Requirement** | **/req/pre-defined/spatial-object-type** |
-| --- | --- |
-| A | Every collection SHALL contain features of only one feature type
- 
-**NOTE** According to the OAPIF standard a collection could also contain more than one feature type.
- 
-**TEST**
-1. Manual check for every collection, that all its features belong to the same feature type.
-
-| **Requirement** | **/req/pre-defined/feature-concept-dictionary** |
-| --- | --- |
-| A | For each `collection` that provides data that is harmonised according to the \[[IRs for ISDSS]\], a link with the link relation type `tag` to the corresponding entry in the [INSPIRE feature concept dictionary](https://inspire.ec.europa.eu/featureconcept) SHALL be included.
+| A | The Resource Locator SHALL have `URL`, `protocol` and `applicationProfile` elements. |
 
 | **Recommendation** | **/rec/pre-defined/collection-naming** |
 | --- | --- |
 | A | For each `collection` that provides data that is harmonised according to the \[[IRs for ISDSS]\], the id of the collection SHOULD be the lowercase version of the language-neutral name of the feature type as specified in the \[[IRs for ISDSS]\]. | 
 
-
-**TEST**
-1. Check all collections for a valid link to the INSPIRE feature concept dictionary.
-2. If no link is available - MANUAL TEST: Check that the collections have not yet been harmonised.
-
-#### Terms of use
-
-| **Requirement** | **/req/pre-defined/licence** |
-| --- | --- |
-| A | The Web API SHALL contain a link to the licence of the data set in the `links` property of the response of the request to `/collections` (relation: `license`). |
-
-**NOTE** This is an enforcement of subrecommendation B of recommendation http://www.opengis.net/spec/ogcapi-features-1/1.0/rec/core/fc-md-license in [OGC API - Features - 1].
-
-
-
-**TEST**
-1. Issue an HTTP GET request to `{root}/collections`.
-2. Validate that at least one of the links returned in the response has `rel` link parameter `license`.
-3. For each of the links returned in the response having a `rel` link parameter equal to `license`, issue an HTTP GET request to the path given in the `href` link parameter of that link.
-4. For each of the responses, validate that the HTTP status code is 200.
-
 | **Recommendation** | **/rec/pre-defined/license-openapi** |
 | --- | --- |
 | A | The licence information for the exposed data set SHOULD be provided in accordance with [OpenAPI 3.0]. |
 
-**NOTE**: A proposal for mapping between INSPIRE NS Metadata elements and OpenAPI definition fields is available in [Annex C.](#inspire-ns-openapi)
-
-### 8.2. Requirements class INSPIRE-multilinguality <a name="req-multilinguality"></a>
+### 8.2. Service Metadata <a name="req-multilinguality"></a>
 
 | Requirements class | http://inspire.ec.europa.eu/id/spec/oapif-download/1.0/req/multilinguality |
 | --- | --- |
